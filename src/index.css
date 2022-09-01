@@ -15,10 +15,6 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  background: var(--clr-bg);
-}
-
 h1,
 h2,
 h3,
