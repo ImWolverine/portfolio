@@ -1,19 +1,19 @@
 const header = {
   // all the properties are optional - can be left empty or deleted
-  homepage: 'https://rajshekhar26.github.io/cleanfolio',
-  title: 'JS.',
+  homepage: 'https://whimsical-zuccutto-41d72b.netlify.app',
+  title: 'LM.',
 }
 
 const about = {
   // all the properties are optional - can be left empty or deleted
-  name: 'John Smith',
-  role: 'Front End Engineer',
+  name: 'Logan MacAskill',
+  role: 'High School Student',
   description:
     'Adipisicing sit fugit ullam unde aliquid sequi Facilis soluta facilis perspiciatis corporis nulla aspernatur. Autem eligendi rerum delectus modi quisquam? Illo ut quasi nemo ipsa cumque perspiciatis! Maiores minima consectetur.',
   resume: 'https://example.com',
   social: {
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
+//     linkedin: 'https://linkedin.com',
+    github: 'https://github.com/ImWolverine',
   },
 }
 
@@ -52,20 +52,17 @@ const skills = [
   'HTML',
   'CSS',
   'JavaScript',
-  'TypeScript',
-  'React',
-  'Redux',
-  'SASS',
-  'Material UI',
+  'Java',
+  'Python',
+  'R',
+  'p5.js',
   'Git',
-  'CI/CD',
-  'Jest',
-  'Enzyme',
+  'CLI',
 ]
 
 const contact = {
   // email is optional - if left empty Contact section won't show up
-  email: 'johnsmith@mail.com',
+  email: 'logan@macaskill.com',
 }
 
 export { header, about, projects, skills, contact }
