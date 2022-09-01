@@ -18,8 +18,9 @@ html {
 }
 
 body {
-    overflow: auto;
-    height: 100%;
+  overscroll-behavior: none;
+  overflow: auto;
+  height: 100%;
 }
 
 h1,
