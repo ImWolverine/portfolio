@@ -45,6 +45,10 @@ main {
   margin: 0 auto;
 }
 
+body {
+  background: var(--clr-bg);
+}
+
 .section {
   margin-top: 5em;
 }
