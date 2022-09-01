@@ -49,9 +49,6 @@ main {
 .center {
   display: flex;
   align-items: center;
-  background: -webkit-linear-gradient(#FF6656, #FF87B2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .link {
