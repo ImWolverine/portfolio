@@ -37,6 +37,7 @@
 
 .project {
   background-color: var(--clr-bg-alt);
+  border-radius: 1em;
 }
 
 main {
@@ -108,6 +109,7 @@ body {
   font-size: 0.9rem;
   text-transform: lowercase;
   transition: transform 0.2s ease-in-out;
+  border-radius: 0.4em;
 }
 
 .btn--outline {
