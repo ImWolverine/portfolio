@@ -17,11 +17,17 @@
 .dark {
   --clr-bg: #282C34;
   --clr-bg-alt: #333842;
-  --clr-fg: #AAB3BE;
+  --clr-fg: #7E848F;
   --clr-fg-alt: #AAB3BE;
-  --clr-primary: #519ABA;
+  --clr-primary: #3B8EEA;
   --shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.about__name {
+  background: -webkit-linear-gradient(right, #24D18B, #3B8EEA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 main {
@@ -43,6 +49,9 @@ main {
 .center {
   display: flex;
   align-items: center;
+  background: -webkit-linear-gradient(#FF6656, #FF87B2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .link {
