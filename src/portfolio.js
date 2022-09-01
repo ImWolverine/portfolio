@@ -1,6 +1,6 @@
 const header = {
   // all the properties are optional - can be left empty or deleted
-  homepage: 'https://whimsical-zuccutto-41d72b.netlify.app',
+  homepage: 'https://logan.macaskill.com',
   title: 'LM.',
 }
 
@@ -49,13 +49,13 @@ const projects = [
 const skills = [
   // skills can be added or removed
   // if there are no skills, Skills section won't show up
-  'HTML',
-  'CSS',
   'JavaScript',
+  'p5.js',
   'Java',
   'Python',
+  'HTML',
+  'CSS',
   'R',
-  'p5.js',
   'Git',
   'CLI',
 ]
