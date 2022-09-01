@@ -35,7 +35,21 @@
   -webkit-text-fill-color: transparent;
 }
 
-.section__title {
+.projects__title {
+  background: -webkit-linear-gradient(right, #E06C75, #D19A66);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.skills__title {
+  background: -webkit-linear-gradient(right, #E06C75, #D19A66);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contact__title {
   background: -webkit-linear-gradient(right, #E06C75, #D19A66);
   -webkit-background-clip: text;
   background-clip: text;
