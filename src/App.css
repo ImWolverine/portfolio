@@ -43,14 +43,14 @@
 }
 
 .skills__title {
-  background: -webkit-linear-gradient(right, #E06C75, #D19A66);
+  background: -webkit-linear-gradient(right, #E06C75, #C678DD);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .contact__title {
-  background: -webkit-linear-gradient(right, #E06C75, #D19A66);
+  background: -webkit-linear-gradient(right, #3B8EEA, #24D18B);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
