@@ -13,14 +13,10 @@
 
 html {
   scroll-behavior: smooth;
-  overflow: hidden;
-  height: 100%;
 }
 
 body {
-  overscroll-behavior: none;
-  overflow: auto;
-  height: 100%;
+  background: var(--clr-bg);
 }
 
 h1,
