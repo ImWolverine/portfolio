@@ -115,7 +115,7 @@ export const BlogSEO = ({
 
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'Project',
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': url,
