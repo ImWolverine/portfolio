@@ -5,7 +5,7 @@ class MyDocument extends Document {
       <Html lang="en" className="scroll-smooth">
         <Head>
           <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
-          <link rel="preload" href="/css/fonts/wotfard.ttf" as="font" crossOrigin="anonymous" />
+          <link rel="preload" href="../fonts/wotfard.otf" as="font" crossOrigin="anonymous" />
           <link
             rel="icon"
             type="image/png"

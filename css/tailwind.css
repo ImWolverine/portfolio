@@ -5,7 +5,7 @@
   /* src: local('wotfard.eot');
   src: local('wotfard.eot?#iefix') format('embedded-opentype'), local('wotfard.woff2') format('woff2'),
     local('wotfard.ttf') format('truetype'); */
-  src: url('../fonts/wotfard.ttf') format('truetype');
+  src: url('../fonts/wotfard.otf');
 }
 
 @tailwind base;
