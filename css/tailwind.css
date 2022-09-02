@@ -1,6 +1,29 @@
+@import url('https://use.typekit.net/jtw4wxj.css');
+
+@font-face {
+  font-family: 'Wotfard';
+  src: url('wotfard-regular-webfont.ttf') format('truetype');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'futura';
+  }
+  p,
+  time,
+  div {
+    font-family: 'Wotfard';
+  }
+}
 
 .task-list-item::before {
   @apply hidden;

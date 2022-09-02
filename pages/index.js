@@ -1,5 +1,6 @@
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
+import Intro from '@/components/Intro'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
@@ -10,7 +11,7 @@ import NewsletterForm from '@/components/NewsletterForm'
 const MAX_DISPLAY = 5
 
 export async function getStaticProps() {
-  const posts = await getAllFilesFrontMatter('blog')
+  const posts = await getAllFilesFrontMatter('projects')
 
   return { props: { posts } }
 }
@@ -18,15 +19,16 @@ export async function getStaticProps() {
 export default function Home({ posts }) {
   return (
     <>
-      <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
+      <Intro
+        name="Logan MacAskill"
+        description="I'm a High School student who loves programming."
+      />
+      <PageSEO title={siteMetadata.title} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Latest
+          <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14">
+            Lastest Projects
           </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
-          </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
@@ -47,7 +49,7 @@ export default function Home({ posts }) {
                         <div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight">
                             <Link
-                              href={`/blog/${slug}`}
+                              href={`/projects/${slug}`}
                               className="text-gray-900 dark:text-gray-100"
                             >
                               {title}
@@ -65,7 +67,7 @@ export default function Home({ posts }) {
                       </div>
                       <div className="text-base font-medium leading-6">
                         <Link
-                          href={`/blog/${slug}`}
+                          href={`/projects/${slug}`}
                           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           aria-label={`Read "${title}"`}
                         >
@@ -83,11 +85,11 @@ export default function Home({ posts }) {
       {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end text-base font-medium leading-6">
           <Link
-            href="/blog"
+            href="/projects"
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="all posts"
+            aria-label="all projects"
           >
-            All Posts &rarr;
+            All Projects &rarr;
           </Link>
         </div>
       )}

@@ -1,5 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
+const { NodeNextRequest } = require('next/dist/server/base-http/node')
 
 module.exports = {
   experimental: {
@@ -25,10 +26,10 @@ module.exports = {
         14: '3.5rem',
       },
       fontFamily: {
-        sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
+        sans: [...defaultTheme.fontFamily.sans],
       },
       colors: {
-        primary: colors.teal,
+        primary: colors.blue,
         gray: colors.neutral,
       },
       typography: (theme) => ({
@@ -36,8 +37,12 @@ module.exports = {
           css: {
             color: theme('colors.gray.700'),
             a: {
+              fontWeight: '1000',
               color: theme('colors.primary.500'),
+              textUnderlineOffset: '5px',
+              textDecoration: 'none',
               '&:hover': {
+                borderBottom: '2px solid',
                 color: `${theme('colors.primary.600')} !important`,
               },
               code: { color: theme('colors.primary.400') },
