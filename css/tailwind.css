@@ -2,8 +2,9 @@
 
 @font-face {
   font-family: 'Wotfard';
-  src: url('Wotfard.eot');
-  src: url('wotfard.woff2') format('woff2'), url('wotfard.ttf') format('truetype');
+  src: url('wotfard.eot');
+  src: url('wotfard.eot?#iefix') format('embedded-opentype'), url('wotfard.woff2') format('woff2'),
+    url('wotfard.ttf') format('truetype');
 }
 
 @tailwind base;
