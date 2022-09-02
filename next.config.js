@@ -6,11 +6,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app webpack use.typekit.net;
-  style-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' use.typekit.net;
   img-src * blob: data:;
   media-src 'none';
   connect-src *;
-  font-src 'self';
+  font-src 'self' webpack;
   frame-src giscus.app
 `
 
