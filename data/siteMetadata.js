@@ -1,5 +1,5 @@
 const siteMetadata = {
-  title: 'Logan MacAskill',
+  title: 'Portfolio',
   author: 'Logan MacAskill',
   headerTitle: 'Home',
   description: '',

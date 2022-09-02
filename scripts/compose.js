@@ -56,12 +56,12 @@ inquirer
   .prompt([
     {
       name: 'title',
-      message: 'Enter post title:',
+      message: 'Enter project title:',
       type: 'input',
     },
     {
       name: 'extension',
-      message: 'Choose post extension:',
+      message: 'Choose project extension:',
       type: 'list',
       choices: ['mdx', 'md'],
     },
@@ -73,12 +73,12 @@ inquirer
     },
     {
       name: 'summary',
-      message: 'Enter post summary:',
+      message: 'Enter project summary:',
       type: 'input',
     },
     {
       name: 'draft',
-      message: 'Set post as draft?',
+      message: 'Set project as draft?',
       type: 'list',
       choices: ['yes', 'no'],
     },
