@@ -10,7 +10,7 @@ const ContentSecurityPolicy = `
   img-src * blob: data:;
   media-src 'none';
   connect-src *;
-  font-src 'self' * webpack;
+  font-src * data: blob: 'unsafe-inline';
   frame-src giscus.app
 `
 
