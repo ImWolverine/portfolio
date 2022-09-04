@@ -1,7 +1,7 @@
 ---
 title: Wordle Solver
 date: '2022-09-01'
-tags: ['tag1', 'tag2']
+tags: []
 draft: false
 summary: A near perfect wordle solver
 images: []
@@ -42,3 +42,27 @@ Each day the secret word changes, so you can compete with your friends for how m
 import { Wordle } from './Wordle'
 
 <Wordle words="hello,world,solve" solution="solve" />
+
+```py
+def get_color_combo(guess, solution):
+    guess_length = len(guess)
+    solution_length = len(solution)
+
+    not_green = [i for i, letter in enumerate(guess) if (i >= solution_length) or (letter != solution[i])]
+
+    long_not_green = not_green + list(range(guess_length, solution_length))
+
+    counts = Counter(solution[i] for i in long_not_green if i < solution_length)
+
+    color_combo = [2] * len(guess)
+
+    for letter_index in not_green:
+        letter = guess[letter_index]
+        if counts[letter] > 0:
+            color_combo[letter_index] = 1
+            counts[letter] -= 1
+        else:
+            color_combo[letter_index] = 0
+
+    return color_combo
+```

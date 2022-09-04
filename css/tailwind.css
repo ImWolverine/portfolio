@@ -16,6 +16,9 @@
   div {
     font-family: 'Wotfard';
   }
+  * {
+    font-weight: 600;
+  }
 }
 
 .task-list-item::before {

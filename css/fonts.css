@@ -5,3 +5,8 @@
         local('wotfard.ttf') format('truetype'); */
   src: url('/fonts/wotfard.otf');
 }
+
+@font-face {
+  font-family: 'FiraCode';
+  src: url('/fonts/FiraCode-Bold.ttf');
+}

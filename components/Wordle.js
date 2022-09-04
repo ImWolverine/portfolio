@@ -9,7 +9,20 @@ export const Wordle = ({ words, solution }) => {
     }
   }
 
-  return <div className="wordle-grid">{rows}</div>
+  return (
+    <div
+      className="wordle-grid"
+      style={{
+        backgroundColor: '#121213',
+        border: '#1E262F',
+        borderStyle: 'solid',
+        borderRadius: '0.375rem',
+        borderWidth: '2px',
+      }}
+    >
+      {rows}
+    </div>
+  )
 }
 
 export const WordleEmptyRow = () => {
