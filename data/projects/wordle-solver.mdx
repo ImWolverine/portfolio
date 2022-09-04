@@ -1,0 +1,44 @@
+---
+title: Wordle Solver
+date: '2022-09-01'
+tags: ['tag1', 'tag2']
+draft: false
+summary: A near perfect wordle solver
+images: []
+layout: PostLayout
+canonicalUrl: https://logan.macaskill.com/projects/wordle-solver
+---
+
+## Overview
+
+- What is wordle?
+- What solving strategies can we use?
+  - Count colors
+  - Look ahead
+  - Brute force
+- How do we code it?
+  - define a `simulate_guess` function
+  - define a `possible_words` function
+  - define a `word_score` function
+  - define a `optimal_guess` function
+- How can we optimize it?
+  - What is the best starting word?
+  - Precompute second guesses
+- How does it compare?
+  - How to score an algorithm
+  - Our score compared to others
+- Final thoughts
+
+<br />
+
+# What is Wordle?
+
+Wordle is a popular game that involves guessing a five-letter secret word.
+You get six attempts and each time you guess, you're told which of the letters are in the secret word, and whether they're in the right place.
+Each day the secret word changes, so you can compete with your friends for how many guesses it takes you.
+
+## Example Game:
+
+import { Wordle } from './Wordle'
+
+<Wordle words="hello,world,solve" solution="solve" />

@@ -3,6 +3,7 @@ import '@/css/prism.css'
 import 'katex/dist/katex.css'
 import '@fontsource/inter/variable-full.css'
 import '../css/fonts.css'
+import '../css/wordle.css'
 
 import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
