@@ -51,7 +51,7 @@ module.exports = {
           800: '#1e262f',
           900: '#21232c',
         },
-        yellow: '#FFE103',
+        light_blue: '#7F94FF',
         background: '#0e141b',
       },
       fontWeight: {
@@ -63,7 +63,6 @@ module.exports = {
         DEFAULT: {
           css: {
             color: theme('colors.white'),
-            lineHeight: 'calc(1em + 0.725rem)',
             fontWeight: '600',
             a: {
               fontWeight: '900',
@@ -81,16 +80,21 @@ module.exports = {
               color: theme('colors.gray.100'),
             },
             h2: {
+              fontSize: '2em',
               fontWeight: '700',
               letterSpacing: theme('letterSpacing.tight'),
               color: theme('colors.gray.100'),
             },
             h3: {
+              fontSize: '1.5em',
               fontWeight: '600',
+              letterSpacing: theme('letterSpacing.tight'),
               color: theme('colors.gray.100'),
             },
             'h4,h5,h6': {
+              fontSize: '1.25em',
               fontWeight: '600',
+              letterSpacing: theme('letterSpacing.tight'),
               color: theme('colors.gray.100'),
             },
             pre: {

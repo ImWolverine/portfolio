@@ -88,6 +88,14 @@ pre[class*='language-'] {
     text-shadow: none;
   }
 }
+/* 
+.remark-code-title {
+  @apply rounded-t bg-gray-700 px-5 py-3 font-mono text-sm font-bold text-gray-100;
+}
+
+.remark-code-title + div > pre {
+  @apply mt-0 rounded-t-none;
+} */
 
 .token.comment,
 .token.prolog,

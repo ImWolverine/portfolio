@@ -9,18 +9,23 @@ layout: PostLayout
 canonicalUrl: https://logan.macaskill.com/projects/wordle-solver
 ---
 
+import { Wordle } from './Wordle'
+
 ## Overview
 
 - What is wordle?
 - What solving strategies can we use?
-  - Count colors
-  - Look ahead
-  - Brute force
+  - Counting colors (Naive)
+  - Looking ahead (Optimal)
+  - Using brute force (Perfect)
+- Which strategy is the best?
 - How do we code it?
-  - define a `simulate_guess` function
-  - define a `possible_words` function
-  - define a `word_score` function
-  - define a `optimal_guess` function
+  - Implement a `simulate_guess` function
+    - Naive method
+    - Proper method
+  - Implement a `possible_words` function
+  - Implement a `word_score` function
+  - Implement a `optimal_guess` function
 - How can we optimize it?
   - What is the best starting word?
   - Precompute second guesses
@@ -29,40 +34,125 @@ canonicalUrl: https://logan.macaskill.com/projects/wordle-solver
   - Our score compared to others
 - Final thoughts
 
-<br />
+---
 
-# What is Wordle?
+## What is Wordle?
 
 Wordle is a popular game that involves guessing a five-letter secret word.
-You get six attempts and each time you guess, you're told which of the letters are in the secret word, and whether they're in the right place.
-Each day the secret word changes, so you can compete with your friends for how many guesses it takes you.
+You get six attempts and each time you guess you're told which of the letters are in the secret word, and whether they're in the right place.
+Each day brings a new secret word, so you can compete with your friends and try to get the fewest guesses.
 
-## Example Game:
+### This is what a simple game would look like:
 
-import { Wordle } from './Wordle'
+Each guess is on it's own line, and in this case, the solution was "solve".
 
 <Wordle words="hello,world,solve" solution="solve" />
 
-```py
-def get_color_combo(guess, solution):
-    guess_length = len(guess)
-    solution_length = len(solution)
+### Color meanings
 
-    not_green = [i for i, letter in enumerate(guess) if (i >= solution_length) or (letter != solution[i])]
+- Green: this letter is in the secret word, and it's in the correct spot
+- Yellow: this letter is in the secret word, but it's in the wrong spot
+- Gray: this letter is not in the secret word
 
-    long_not_green = not_green + list(range(guess_length, solution_length))
+Now that you know how to play wordle, we can get into the real meat of this project.
 
-    counts = Counter(solution[i] for i in long_not_green if i < solution_length)
+---
 
-    color_combo = [2] * len(guess)
+## What solving strategies can we use?
 
-    for letter_index in not_green:
-        letter = guess[letter_index]
-        if counts[letter] > 0:
-            color_combo[letter_index] = 1
-            counts[letter] -= 1
-        else:
-            color_combo[letter_index] = 0
+There is one fundemental strategy that we can use, but there are a few different approaches to calculating how good a guess really is. The main strategy involves simulating every possible guess with every possible solution and then calculating the best one. The different approches comes with how we handle that last part, calculating a score based on the simulated guess.
 
-    return color_combo
+There are three main ways to do this:
+
+- Counting colors (Naive)
+- Looking ahead (Optimal)
+- Using brute force (Perfect)
+
+### Counting colors (Naive)
+
+The way this strategy works is by counting how many green, yellow, and gray letters we end up with after each simulated guess. We can assign points to each color, eg: (Green: 10, Yellow: 3, Gray: 1) and then average up the points for each guess. This works alright, but the main issue comes with finding optimal point values for each color, and making combinations of colors in different contexts worth more or less.
+
+### Looking ahead (Optimal)
+
+The way this strategy works is by simulating guesses and then counting how many solutions are possible after each guess. This approach essentially optimizes for cutting down the size of the solution set as much as possible, and works really well because of this. The only pitfall with this approach is when we fall into a scenario where there are a lot of very similar words.
+
+### Example
+
+We know that it ends with "atch", but there are a lot of "atch" words we need to go through.
+
+<Wordle words="bench,latch,match,patch,natch,ratch" solution="watch" />
+
+### Using brute force (Perfect)
+
+The way this strategy works is by using a similar technique to the Look Ahead approach, but doesnt just look one step ahead and instead goes 6 steps ahead. This perfectly calculates the probabilistically optimal guess because it can go through the entire space of possibilities. Because it looks so far ahead, it can avoid the scenario where we have many similar words like above. This approach might seem perfect, and it is, but a glaring issue arises when we actually implement it: It takes a LONG time to go through all possible wordle games.
+
+---
+
+## So, which strategy is the best?
+
+While all of these strategies work well in their own regard, the best strategy for realistically computing the best next guess is with the Looking Ahead approach.
+
+---
+
+## How do we code it?
+
+I'm going to use python for this project because it's easy to read and write while being somewhat fast for a project like this.
+
+### Implement a `simulate_guess` function
+
+The base of the whole program is this function which takes in a guess and a solution and spits out colors for each letter. At first glance it seems pretty simple, and that something like this would work.
+
+#### Naive method
+
+```python
+def simulate_guess(guess, solution):
+  colors = []
+  for i, letter in enumerate(guess):
+    if letter == solution[i]:
+      colors.append(3) # Green
+    else if letter in solution:
+      colors.append(2) # Yellow
+    else:
+      colors.append(1) # Gray
+  return colors
+```
+
+#### Proper method
+
+```python
+def simulate_guess(guess, solution):
+  # All the indices that are not green
+  not_green = [i for i, letter in enumerate(guess) if letter != solution[i]]
+
+  # Counter of the letters in the solution that are not green
+  counts = Counter(solution[i] for i in not_green)
+
+  # Prepare color_combo with all green
+  color_combo = [2, 2, 2, 2, 2]
+
+  # Loop through all letters that arent green
+  for letter_index in not_green:
+
+    # Guess letter thats not green
+    letter = guess[letter_index]
+
+    # If there are remaining available yellows for the letter
+    if counts[letter] > 0:
+      # Set to yellow and reduce the count
+      color_combo[letter_index] = 1
+      counts[letter] -= 1
+    else:
+      # Set to gray
+      color_combo[letter_index] = 0
+
+  return color_combo
+```
+
+### Implement a `possible_words` function
+
+```python
+def possible_words(words, guesses):
+  for guesses in guesses:
+    words = [word for word in words if simulate_guess(guesses["word"], word) == guesses["colors"]]
+  return words
 ```
