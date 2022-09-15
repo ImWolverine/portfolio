@@ -1,11 +1,11 @@
-export const Wordle = ({ words, solution }) => {
+export const Wordle = ({ words, solution, naive = false }) => {
   let rows = []
   words = words.split(',')
   for (let i = 0; i < 6; i++) {
     if (i > words.length - 1) {
       rows.push(<WordleEmptyRow />)
     } else {
-      rows.push(<WordleRow word={words[i]} solution={solution} />)
+      rows.push(<WordleRow word={words[i]} solution={solution} naive={naive} />)
     }
   }
 
@@ -53,7 +53,7 @@ for letter_index in not_green:
 return color_combo
 */
 
-export const WordleRow = ({ word, solution }) => {
+export const WordleRow = ({ word, solution, naive = false }) => {
   let notGreen = []
   for (let i = 0; i < 5; i++) {
     if (word[i] != solution[i]) {
@@ -90,12 +90,22 @@ export const WordleRow = ({ word, solution }) => {
 
   let colors = []
   for (let i = 0; i < 5; i++) {
-    if (colorCombo[i] == 2) {
-      colors[i] = 'green'
-    } else if (colorCombo[i] == 1) {
-      colors[i] = 'yellow'
+    if (naive) {
+      if (word[i] == solution[i]) {
+        colors[i] = 'green'
+      } else if (solution.indexOf(word[i]) != -1) {
+        colors[i] = 'yellow'
+      } else {
+        colors[i] = 'gray'
+      }
     } else {
-      colors[i] = 'gray'
+      if (colorCombo[i] == 2) {
+        colors[i] = 'green'
+      } else if (colorCombo[i] == 1) {
+        colors[i] = 'yellow'
+      } else {
+        colors[i] = 'gray'
+      }
     }
   }
 

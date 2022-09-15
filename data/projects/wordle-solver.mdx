@@ -102,7 +102,7 @@ I'm going to use python for this project because it's easy to read and write whi
 
 ### Implement a `simulate_guess` function
 
-The base of the whole program is this function which takes in a guess and a solution and spits out colors for each letter. At first glance it seems pretty simple, and that something like this would work.
+The base of the whole program is a function which takes in a simulated guess and a solution and spits out colors for each letter. At first glance it seems pretty simple, and you would think that something like this would work.
 
 #### Naïve method
 
@@ -118,6 +118,15 @@ def simulate_guess(guess, solution):
       colors.append(1) # Gray
   return colors
 ```
+
+Turns out its actually a little more complicated than that. An issue arises when we have duplicate letters in the solution and/or in the simulated guess. The left example is the naive method and the right is what we want to see.
+
+<div className="wordle-row">
+  <Wordle words="hello,world,solve" solution="solve" naive={true} />
+  <Wordle words="hello,world,solve" solution="solve" naive={false} />
+</div>
+
+The reason why the second `L` in `HELLO` should be gray and not yellow is because we've already labeled one `L` as green so labeling both would make it look like the solution has two `L`s. So our improved method should count how many letters we've labeled in the solution word. Here is what that code looks like:
 
 #### Proper method
 
