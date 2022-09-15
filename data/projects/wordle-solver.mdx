@@ -10,21 +10,24 @@ canonicalUrl: https://logan.macaskill.com/projects/wordle-solver
 ---
 
 import { Wordle } from './Wordle'
+import { Chart } from 'react-chartjs-2'
 
 ## Overview
 
 - What is wordle?
 - What solving strategies can we use?
-  - Counting colors (Naive)
+  - Counting colors (Naïve)
   - Looking ahead (Optimal)
   - Using brute force (Perfect)
 - Which strategy is the best?
 - How do we code it?
   - Implement a `simulate_guess` function
-    - Naive method
+    - Naïve method
     - Proper method
   - Implement a `possible_words` function
   - Implement a `word_score` function
+    - Naïve method
+    - Efficient method
   - Implement a `optimal_guess` function
 - How can we optimize it?
   - What is the best starting word?
@@ -64,11 +67,11 @@ There is one fundemental strategy that we can use, but there are a few different
 
 There are three main ways to do this:
 
-- Counting colors (Naive)
+- Counting colors (Naïve)
 - Looking ahead (Optimal)
 - Using brute force (Perfect)
 
-### Counting colors (Naive)
+### Counting colors (Naïve)
 
 The way this strategy works is by counting how many green, yellow, and gray letters we end up with after each simulated guess. We can assign points to each color, eg: (Green: 10, Yellow: 3, Gray: 1) and then average up the points for each guess. This works alright, but the main issue comes with finding optimal point values for each color, and making combinations of colors in different contexts worth more or less.
 
@@ -102,7 +105,7 @@ I'm going to use python for this project because it's easy to read and write whi
 
 The base of the whole program is this function which takes in a guess and a solution and spits out colors for each letter. At first glance it seems pretty simple, and that something like this would work.
 
-#### Naive method
+#### Naïve method
 
 ```python
 def simulate_guess(guess, solution):
@@ -153,6 +156,183 @@ def simulate_guess(guess, solution):
 ```python
 def possible_words(words, guesses):
   for guesses in guesses:
-    words = [word for word in words if simulate_guess(guesses["word"], word) == guesses["colors"]]
+    words = [
+      word for word in words
+        if simulate_guess(guesses["word"], word) == guesses["colors"]
+    ]
   return words
 ```
+
+### Implement a `word_score` function
+
+#### Naïve method
+
+```python
+def word_score(guess, solutions):
+  total = 0
+  for solution in solutions:
+    total += len(
+      possible_words(solutions, [{
+        'word': guess,
+        'colors': simulate_guess(guess, solution)
+      }])
+    )
+  return total / len(solutions)
+```
+
+#### Efficient method
+
+```python
+def word_score(guess, solutions):
+  color_combos = []
+  for solution in solutions:
+    color_combos.append(tuple(simulate_guess(guess, solution)))
+
+  counts = Counter(color_combos).values()
+
+  average = 0
+  for count in counts:
+    chance = count / sum(counts)
+    average += chance * count
+
+  return average
+```
+
+#### With list comprehension & lambda
+
+```python
+word_score = lambda (guess, solutions): sum(count ** 2 for count in Counter(tuple(simulate_guess(guess, solution)) for solution in solutions).values()) / len(solutions)
+```
+
+<Chart
+  type="bar"
+  datasetIdKey="id"
+  data={{
+    datasets: [
+      {
+        data: [
+          { x: '00000', y: 567 },
+          { x: '00100', y: 499 },
+          { x: '00010', y: 179 },
+          { x: '00110', y: 109 },
+          { x: '01000', y: 98 },
+          { x: '00200', y: 97 },
+          { x: '02000', y: 89 },
+          { x: '10000', y: 69 },
+          { x: '01100', y: 56 },
+          { x: '10100', y: 55 },
+          { x: '00210', y: 46 },
+          { x: '00020', y: 44 },
+          { x: '00120', y: 40 },
+          { x: '01010', y: 40 },
+          { x: '20000', y: 35 },
+          { x: '20100', y: 32 },
+          { x: '02100', y: 21 },
+          { x: '02010', y: 16 },
+          { x: '00021', y: 14 },
+          { x: '11000', y: 11 },
+          { x: '00022', y: 10 },
+          { x: '01020', y: 9 },
+          { x: '01120', y: 9 },
+          { x: '21000', y: 9 },
+          { x: '22000', y: 9 },
+          { x: '12100', y: 9 },
+          { x: '01110', y: 8 },
+          { x: '00220', y: 8 },
+          { x: '10010', y: 8 },
+          { x: '20200', y: 7 },
+          { x: '11100', y: 7 },
+          { x: '01002', y: 7 },
+          { x: '12000', y: 7 },
+          { x: '02110', y: 5 },
+          { x: '20020', y: 5 },
+          { x: '11010', y: 5 },
+          { x: '00222', y: 5 },
+          { x: '02200', y: 5 },
+          { x: '02120', y: 4 },
+          { x: '21100', y: 4 },
+          { x: '10200', y: 4 },
+          { x: '20022', y: 4 },
+          { x: '02020', y: 3 },
+          { x: '00121', y: 3 },
+          { x: '02002', y: 3 },
+          { x: '10110', y: 2 },
+          { x: '22100', y: 2 },
+          { x: '12010', y: 2 },
+          { x: '01102', y: 2 },
+          { x: '22010', y: 2 },
+          { x: '11110', y: 2 },
+          { x: '00111', y: 2 },
+          { x: '01021', y: 2 },
+          { x: '02021', y: 2 },
+          { x: '12110', y: 1 },
+          { x: '22220', y: 1 },
+          { x: '22120', y: 1 },
+          { x: '00002', y: 1 },
+          { x: '10020', y: 1 },
+          { x: '10210', y: 1 },
+          { x: '20120', y: 1 },
+          { x: '00102', y: 1 },
+          { x: '01022', y: 1 },
+          { x: '00012', y: 1 },
+          { x: '22222', y: 1 },
+          { x: '01111', y: 1 },
+          { x: '02220', y: 1 },
+          { x: '20021', y: 1 },
+          { x: '02011', y: 1 },
+          { x: '20220', y: 1 },
+          { x: '00011', y: 1 },
+        ],
+        backgroundColor: '#607CFE',
+        tickColor: '#ffffff',
+      },
+    ],
+  }}
+  options={{
+    legend: {
+      display: false,
+      labels: {
+        fontColor: '#ABB2BF',
+      },
+    },
+    layout: {
+      padding: {
+        left: 20,
+        right: 20,
+        top: 20,
+        bottom: 20,
+      },
+    },
+    scales: {
+      y: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color: '#ABB2BF',
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          display: false,
+        },
+      },
+    },
+  }}
+  plugins={[
+    {
+      id: 'custom_canvas_background_color',
+      beforeDraw: (chart) => {
+        const { ctx } = chart
+        ctx.save()
+        ctx.globalCompositeOperation = 'destination-over'
+        ctx.fillStyle = '#1E262F'
+        ctx.fillRect(0, 0, chart.width, chart.height)
+        ctx.restore()
+      },
+    },
+  ]}
+/>
